@@ -18,8 +18,6 @@ public final class StormOmega extends JavaPlugin {
 
         INSTANCE_MANAGER.addTemplate("skyblock_hub", new Vector(-3, 70, -69));
 
-        //getServer().getPluginCommand("test").setExecutor(new TestCmd());
-
         INSTANCE_MANAGER.createInstance(TestHubInstance.class, "skyblock_hub");
 
     }

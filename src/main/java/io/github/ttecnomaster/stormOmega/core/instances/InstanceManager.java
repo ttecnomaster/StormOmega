@@ -94,6 +94,9 @@ public class InstanceManager {
             throw new RuntimeException(e);
         }
 
+        // Call start on the Instance
+        instance.start();
+
     }
 
     private static class Template {

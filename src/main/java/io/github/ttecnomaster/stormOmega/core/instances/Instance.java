@@ -12,7 +12,14 @@ public abstract class Instance {
         return uuid;
     }
 
+    public SlimeWorld getSlimeWorld() {
+        return slimeWorld;
+    }
+
     public boolean isLoaded() {
         return slimeWorld == null;
     }
+
+    public abstract void start();
+    public abstract void tick();
 }

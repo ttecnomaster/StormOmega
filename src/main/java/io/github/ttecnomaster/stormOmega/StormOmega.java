@@ -1,6 +1,8 @@
 package io.github.ttecnomaster.stormOmega;
 
+import io.github.ttecnomaster.stormOmega.core.instances.Instance;
 import io.github.ttecnomaster.stormOmega.core.instances.InstanceManager;
+import io.github.ttecnomaster.stormOmega.skyblock.instances.SkyblockInstance;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.util.Vector;
@@ -18,7 +20,9 @@ public final class StormOmega extends JavaPlugin {
 
         INSTANCE_MANAGER.addTemplate("skyblock_hub", new Vector(-3, 70, -69));
 
-        INSTANCE_MANAGER.createInstance(TestHubInstance.class, "skyblock_hub");
+        Instance instance = INSTANCE_MANAGER.createInstance(SkyblockInstance.class, "skyblock_hub");
+
+        getServer().getScheduler().scheduleSyncRepeatingTask(this, instance::tick, 1, 1);
 
     }
 

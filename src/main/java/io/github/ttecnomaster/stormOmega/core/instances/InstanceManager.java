@@ -9,6 +9,7 @@ import com.grinderwolf.swm.api.loaders.SlimeLoader;
 import com.grinderwolf.swm.api.world.SlimeWorld;
 import io.github.ttecnomaster.stormOmega.StormOmega;
 import org.bukkit.Bukkit;
+import org.bukkit.World;
 import org.bukkit.util.Vector;
 
 import java.io.IOException;
@@ -39,7 +40,7 @@ public class InstanceManager {
             field.setAccessible(true);
             field.set(instance, uuid);
 
-            createTemporarySlimeWorld(instance, template, uuid.toString());
+            createTemporarySlimeWorld(instance, template, true ? "instance" : uuid.toString());
 
             return instance;
 
@@ -90,6 +91,16 @@ public class InstanceManager {
             Field field = Instance.class.getDeclaredField("slimeWorld");
             field.setAccessible(true);
             field.set(instance, slimeWorld);
+        } catch (NoSuchFieldException | IllegalAccessException e) {
+            throw new RuntimeException(e);
+        }
+
+        // Set the field "bukkitWorld" of Instance to the slimeWorld
+        World bukkitWorld = Bukkit.getWorld(slimeWorld.getName());
+        try {
+            Field field = Instance.class.getDeclaredField("bukkitWorld");
+            field.setAccessible(true);
+            field.set(instance, bukkitWorld);
         } catch (NoSuchFieldException | IllegalAccessException e) {
             throw new RuntimeException(e);
         }
